@@ -1,0 +1,92 @@
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app>
+
+    <!--servlet>
+        <servlet-name>TestServlet</servlet-name>
+        <servlet-class>edu.uga.cs.lsdis.semdis.spotting.servlets.MyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TestServlet</servlet-name>
+        <url-pattern>/go</url-pattern>
+    </servlet-mapping-->
+    
+	<servlet>
+		<servlet-name>Login</servlet-name>
+		<servlet-class>Login</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Login</servlet-name>
+		<url-pattern>/Login</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>Registration</servlet-name>
+		<servlet-class>Registration</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Registration</servlet-name>
+		<url-pattern>/Registration</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminEditRoll</servlet-name>
+		<servlet-class>AdminEditRoll</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminEditRoll</servlet-name>
+		<url-pattern>/AdminEditRoll</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>AdminEditSection</servlet-name>
+		<servlet-class>AdminEditSection</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminEditSection</servlet-name>
+		<url-pattern>/AdminEditSection</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>ViewEnrollment</servlet-name>
+		<servlet-class>ViewEnrollment</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ViewEnrollment</servlet-name>
+		<url-pattern>/ViewEnrollment</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>StudentTakeExam</servlet-name>
+		<servlet-class>StudentTakeExam</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>StudentTakeExam</servlet-name>
+		<url-pattern>/TakeExam</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!--Micah's-->
+	
+	<servlet>        <servlet-name>DeleteDepartment</servlet-name>        <servlet-class>DeleteDepartment</servlet-class>      </servlet>      <servlet-mapping>        <servlet-name>DeleteDepartment</servlet-name>        <url-pattern>/DeleteDepartment</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>CreateDepartment</servlet-name>        <servlet-class>CreateDepartment</servlet-class>      </servlet>      <servlet-mapping>        <servlet-name>CreateDepartment</servlet-name>        <url-pattern>/CreateDepartment</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>ModifyDepartment</servlet-name>            <servlet-class>ModifyDepartment</servlet-class>      </servlet>      <servlet-mapping>        <servlet-name>ModifyDepartment</servlet-name>        <url-pattern>/ModifyDepartment</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>SearchClassrooms</servlet-name>            <servlet-class>SearchClassrooms</servlet-class>      </servlet>      <servlet-mapping>        <servlet-name>SearchClassrooms</servlet-name>        <url-pattern>/SearchClassrooms</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>ModifyClassroom</servlet-name>        <servlet-class>ModifyClassroom</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>ModifyClassroom</servlet-name>        <url-pattern>/ModifyClassroom</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>DeleteClassroom</servlet-name>        <servlet-class>DeleteClassroom</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>DeleteClassroom</servlet-name>        <url-pattern>/DeleteClassroom</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>CreateClassroom</servlet-name>        <servlet-class>CreateClassroom</servlet-class>       </servlet>      <servlet-mapping>        <servlet-name>CreateClassroom</servlet-name>        <url-pattern>/CreateClassroom</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>SearchUsers</servlet-name>        <servlet-class>SearchUsers</servlet-class>       </servlet>      <servlet-mapping>        <servlet-name>SearchUsers</servlet-name>        <url-pattern>/SearchUsers</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>DeleteUser</servlet-name>        <servlet-class>DeleteUser</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>DeleteUser</servlet-name>        <url-pattern>/DeleteUser</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>CreateUser</servlet-name>        <servlet-class>CreateUser</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>CreateUser</servlet-name>        <url-pattern>/CreateUser</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>ModifyUser</servlet-name>        <servlet-class>ModifyUser</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>ModifyUser</servlet-name>        <url-pattern>/ModifyUser</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>CreateCourse</servlet-name>        <servlet-class>CreateCourse</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>CreateCourse</servlet-name>        <url-pattern>/CreateCourse</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>SearchCourses</servlet-name>        <servlet-class>SearchCourses</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>SearchCourses</servlet-name>        <url-pattern>/SearchCourses</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>ModifyCourse</servlet-name>        <servlet-class>ModifyCourse</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>ModifyCourse</servlet-name>        <url-pattern>/ModifyCourse</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>DeleteCourse</servlet-name>        <servlet-class>DeleteCourse</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>DeleteCourse</servlet-name>        <url-pattern>/DeleteCourse</url-pattern>      </servlet-mapping>    <servlet>        <servlet-name>SearchDepartments</servlet-name>            <servlet-class>SearchDepartments</servlet-class>      </servlet>      <servlet-mapping>        <servlet-name>SearchDepartments</servlet-name>        <url-pattern>/SearchDepartments</url-pattern>      </servlet-mapping>
+	
+	<!--Micah's-->
+	<!--Delroy's-->
+
+	<servlet>        <servlet-name>FacultyCreateExam</servlet-name>        <servlet-class>FacultyCreateExam</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>FacultyCreateExam</servlet-name>        <url-pattern>/FacultyCreateExam</url-pattern>      </servlet-mapping>
+      
+      <servlet>        <servlet-name>FacultyCreateExamQuestion</servlet-name>        <servlet-class>FacultyCreateExamQuestion</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>FacultyCreateExamQuestion</servlet-name>        <url-pattern>/FacultyCreateExamQuestion</url-pattern>      </servlet-mapping>
+      
+      <servlet>        <servlet-name>FacultyEditExam</servlet-name>        <servlet-class>FacultyEditExam</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>FacultyEditExam</servlet-name>        <url-pattern>/FacultyEditExam</url-pattern>      </servlet-mapping>
+      
+      <servlet>        <servlet-name>FacultyMenu</servlet-name>        <servlet-class>FacultyMenu</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>FacultyMenu</servlet-name>        <url-pattern>/FacultyMenu</url-pattern>      </servlet-mapping>
+      
+      <servlet>        <servlet-name>AdminEditExam</servlet-name>        <servlet-class>AdminEditExam</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>AdminEditExam</servlet-name>        <url-pattern>/AdminEditExam</url-pattern>      </servlet-mapping>
+      
+      <servlet>        <servlet-name>AdminEditExamQuestion</servlet-name>        <servlet-class>AdminEditExamQuestion</servlet-class>     </servlet>      <servlet-mapping>        <servlet-name>AdminEditExamQuestion</servlet-name>        <url-pattern>/AdminEditExamQuestion</url-pattern>      </servlet-mapping>
+
+	<!--Delroy's-->
+</web-app>

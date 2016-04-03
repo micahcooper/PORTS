@@ -1,0 +1,270 @@
+
+<project name="PORTS" default="compile" basedir=".">
+
+<!-- ===================== Property Definitions =========================== -->
+
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+
+<!-- ==================== File and Directory Names ======================== -->
+
+  <property name="app.name"       value="ports"/>
+  <property name="app.path"       value="/${app.name}"/>
+  <property name="app.version"    value="1.0-dev"/>
+  <property name="build.home"     value="${basedir}/build"/>
+  <property name="catalina.home"  value="/Users/Durandal/Applications/Tomcat_5.5/"/>
+  <property name="dist.home"      value="${basedir}/dist"/>
+  <property name="docs.home"      value="${basedir}/docs"/>
+  <property name="manager.url"    value="http://localhost:8080/manager"/>
+  <property name="manager.username" value="durandal"/>
+  <property name="manager.password" value="zxc56mnb87"/>
+  <property name="src.home"       value="${basedir}/src"/>
+  <property name="lib.home"       value="${basedir}/lib"/>
+  <property name="web.home"       value="${basedir}/web"/>
+  <property name="run.class"			value="Test"/>
+
+<!-- ================== Custom Ant Task Definitions ======================= -->
+
+  <path id="tomcat.classpath">    <fileset dir="${catalina.home}/server/lib" includes="catalina-ant.jar" />  </path>
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">    <classpath refid="tomcat.classpath" />  </taskdef>
+  <taskdef name="list"     classname="org.apache.catalina.ant.ListTask">
+    <classpath refid="tomcat.classpath" />
+  </taskdef>
+  <taskdef name="reload"   classname="org.apache.catalina.ant.ReloadTask">
+    <classpath refid="tomcat.classpath" />
+  </taskdef>
+  <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask">
+    <classpath refid="tomcat.classpath" />
+  </taskdef>
+
+<!--  ==================== Compilation Control Options ==================== -->
+
+  <property name="compile.debug"       value="true"/>
+  <property name="compile.deprecation" value="false"/>
+  <property name="compile.optimize"    value="true"/>
+
+<!-- ==================== External Dependencies =========================== -->
+
+  <!--property name="semdisAPI_jar"
+           value="${lib.home}/semdisAPI_v0_3.jar"/>
+
+  <property name="uima_core_jar"
+           value="${lib.home}/uima_core.jar"/>
+
+  <property name="semdisImpl_jar"
+           value="${lib.home}/semdisImpl_v0_5.jar"/>
+
+  <property name="jena_v2_3_jar"
+           value="${lib.home}/jena_v2_3.jar"/>
+
+  <property name="xercesImpl_jar"
+           value="${lib.home}/xercesImpl.jar"/>
+
+  <property name="icu4j_jar"
+           value="${lib.home}/icu4j_3_0.jar"/>
+  
+  <property name="mysql_connector_jar"
+           value="${lib.home}/mysql-connector-java-5.0.4-bin.jar"/>
+           
+  <property name="commmons_logging_jar"
+           value="${lib.home}/commons-logging.jar"/-->
+
+<!-- ==================== Compilation Classpath =========================== -->
+
+  <path id="compile.classpath">
+
+    <!-- Include all elements that Tomcat exposes to applications -->
+    <pathelement location="${catalina.home}/common/classes"/>
+
+    <fileset dir="${catalina.home}/common/endorsed">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${catalina.home}/common/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <pathelement location="${catalina.home}/shared/classes"/>
+    <fileset dir="${catalina.home}/shared/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${lib.home}">
+      <include name="*.jar"/>
+    </fileset>
+
+    <!--pathelement location="${semdisAPI_jar}"/>
+    <pathelement location="${uima_core_jar}"/>
+    <pathelement location="${semdisImpl_jar}"/>
+    <pathelement location="${mysql_connector_jar}"/>
+    <pathelement location="${jena_v2_3_jar}"/>
+    <pathelement location="${commons_logging_jar}"/-->
+
+  </path>
+
+<!-- ==================== Clean Target ==================================== -->
+
+  <target name="clean" description="Delete old build and dist directories">
+    <delete dir="${build.home}"/>
+    <delete dir="${dist.home}"/>
+    <delete dir="${basedir}/compiled"/>
+  </target>
+
+<!-- ==================== Compile Target ================================== -->
+
+  <target name="compile" depends="clean, prepare"
+   description="Compile Java sources">
+
+    <!-- Compile Java classes as necessary -->
+    <mkdir    dir="${build.home}/WEB-INF/classes"/>
+    <javac srcdir="${src.home}"
+          destdir="${build.home}/WEB-INF/classes"
+            debug="${compile.debug}"
+      deprecation="${compile.deprecation}"
+         optimize="${compile.optimize}">
+        <classpath refid="compile.classpath"/>
+    </javac>
+
+    <!-- Copy application resources -->
+    <copy  todir="compiled">
+      <fileset dir="${src.home}" excludes="**/*.java"/>
+    </copy>
+    
+    <jar jarfile="${build.home}/WEB-INF/lib/${app.name}.jar"
+         basedir="compiled"/>
+
+    <copy  todir="${build.home}/WEB-INF/lib">
+      <fileset dir="${lib.home}" />
+    </copy>
+
+  </target>
+
+<!-- ==================== Dist Target ===================================== -->
+
+  <target name="dist" depends="compile,javadoc"
+   description="Create binary distribution">
+
+    <!-- Copy documentation subdirectories -->
+    <!--mkdir   dir="${dist.home}/docs"/>
+    <copy    todir="${dist.home}/docs">
+      <fileset dir="${docs.home}"/>
+    </copy-->
+
+    <!-- Create application JAR (or WAR) file -->
+    <!--jar jarfile="${dist.home}/${app.name}-${app.version}.war"
+         basedir="${build.home}"/-->
+    <jar jarfile="${lib.home}/${app.name}.jar"
+         basedir="compiled"/>
+
+  </target>
+
+<!-- ==================== Install Target ================================== -->
+
+  <target name="install" depends="compile"
+   description="Install application to servlet container">
+
+    <deploy url="${manager.url}"
+       username="${manager.username}"
+       password="${manager.password}"
+           path="${app.path}"
+       localWar="file://${build.home}"/>
+
+  </target>
+
+<!-- ==================== Javadoc Target ================================== -->
+
+  <target name="javadoc" depends="compile"
+   description="Create Javadoc API documentation">
+
+    <mkdir          dir="${dist.home}/docs/api"/>
+    <javadoc sourcepath="${src.home}"
+                destdir="${dist.home}/docs/api"
+           packagenames="*">
+      <classpath refid="compile.classpath"/>
+    </javadoc>
+
+  </target>
+
+<!-- ====================== List Target =================================== -->
+
+  <target name="list"
+   description="List installed applications on servlet container">
+
+    <list    url="${manager.url}"
+        username="${manager.username}"
+        password="${manager.password}"/>
+
+  </target>
+
+<!-- ==================== Prepare Target ================================== -->
+
+  <target name="prepare">
+
+    <!-- Create build directories as needed -->
+    <mkdir  dir="${build.home}"/>
+    <mkdir  dir="${build.home}/WEB-INF"/>
+    <mkdir  dir="${build.home}/WEB-INF/classes"/>
+    <mkdir  dir="${build.home}/WEB-INF/lib"/>
+
+    <!-- Copy static content of this web application -->
+    <copy todir="${build.home}">
+      <fileset dir="${web.home}"/>
+    </copy>
+
+  </target>
+
+<!-- ==================== Reload Target =================================== -->
+
+  <target name="reload" depends="compile"
+   description="Reload application on servlet container">
+
+    <reload url="${manager.url}"
+       username="${manager.username}"
+       password="${manager.password}"
+           path="${app.path}"/>
+
+  </target>
+
+<!-- ==================== Remove Target =================================== -->
+
+  <target name="remove"
+   description="Remove application on servlet container">
+
+    <undeploy url="${manager.url}"
+         username="${manager.username}"
+         password="${manager.password}"
+             path="${app.path}"/>
+
+  </target>
+
+<!-- ================= Run Target ==================================== -->
+
+  <target name="run" depends="compile"
+   description="Runs the application">
+
+    <java classname="${run.class}"
+          fork="yes"
+    >
+
+<!-- 
+          output="${basedir}/output.txt"
+      <jvmarg value="-Xms1600m"/>
+      <jvmarg value="-Xmx1600m"/>
+-->
+
+      <classpath>
+      	<fileset dir="${lib.home}">
+      		<include name="*.jar"/>
+    	</fileset>
+        <pathelement path="${build.home}/WEB-INF/classes"/>
+        <!--pathelement location="${semdisAPI_jar}"/>
+        <pathelement location="${semdisImpl_jar}"/>
+        <pathelement location="${uima_core_jar}"/>
+        <pathelement location="${jena_v2_3_jar}"/>
+        <pathelement location="${xercesImpl_jar}"/>
+        <pathelement location="${icu4j_jar}"/>
+        <pathelement location="${mysql_connector_jar}"/>
+        <pathelement location="${commons_logging_jar}"/-->
+      </classpath>
+    </java>
+
+  </target>
+
+</project>
